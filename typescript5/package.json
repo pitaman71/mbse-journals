@@ -1,0 +1,28 @@
+{
+  "name": "@mbse/journals",
+  "version": "0.1.0",
+  "description": "Journals of mbse-schemas stores: each transaction's exact effect, in a journal language of symbols, relation entries and property mutations, applied idempotently, read from any position, inserted at one, sent and received (TypeScript implementation)",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "postinstall": "python3 ../../mbse-basis/scripts/polyrepo.py check && npm --prefix ../../mbse-schemas/typescript5 install --no-audit --no-fund",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx tests/run-notebooks.ts --typecheck",
+    "coverage": "c8 --check-coverage --100 tsx tests/run-notebooks.ts --typecheck"
+  },
+  "dependencies": {
+    "@mbse/schemas": "file:../../mbse-schemas/typescript5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "c8": "^11.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}

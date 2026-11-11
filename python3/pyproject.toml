@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mbse-journals"
+version = "0.1.0"
+description = "Journals of mbse-schemas stores: each transaction's exact effect, in a journal language of symbols, relation entries and property mutations, applied idempotently, read from any position, inserted at one, sent and received"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["mbse-schemas>=0.26.10,<0.27"]
+
+[tool.setuptools.packages.find]
+include = ["mbse*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+"mbse.Journals" = ["skill/*.md"]
+
+[dependency-groups]
+dev = [
+    "coverage[toml]>=7.10",
+    "ipykernel>=7.3.0",
+    "nbformat>=5.11.1",
+    "nbmake>=1.5.5",
+    "pytest>=9.1.1",
+]
+
+[tool.uv.sources]
+mbse-schemas = { path = "../../mbse-schemas/python3", editable = true }  # the sibling checkout: ../mbse-basis/scripts/polyrepo.py
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "tutorials"]
+addopts = "--nbmake"
+
+[tool.coverage.run]
+source = ["mbse.Journals"]
+branch = true
+parallel = true
+patch = ["subprocess"]
+sigterm = true  # a notebook kernel stopped by SIGTERM at shutdown saves its data
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 100
