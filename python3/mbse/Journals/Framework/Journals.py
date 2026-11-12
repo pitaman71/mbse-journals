@@ -43,7 +43,6 @@ that keeps one last, so that mbse-schemas refuses it, alike in every store
 
 from __future__ import annotations
 
-import json
 from collections.abc import Callable, Iterator
 from typing import Any
 
@@ -205,7 +204,7 @@ def changes(transaction: Any) -> Any:
     for e in bindings:
         b = e.binding
         held = b.reference.get()
-        symbols[name[id(b)]] = {"reference": json.loads(held)} if held is not None else {"schema": json.loads(
+        symbols[name[id(b)]] = {"reference": JSON.loads(held)} if held is not None else {"schema": JSON.loads(
             b.schema.get())}
     spec = []
     for e in sorted(transaction.changes, key=lambda e: e.index.get()):
@@ -213,13 +212,13 @@ def changes(transaction: Any) -> Any:
         holder = name[id(_one(c.holder, "binding"))]
         if c.as_schema().name == "Journals.OfPropertyChange":
             verb = c.verb.get()
-            mutation = {"set": {"value": json.loads(c.value.get())}} if verb == "set" else {"clear": {}}
+            mutation = {"set": {"value": JSON.loads(c.value.get())}} if verb == "set" else {"clear": {}}
             spec.append({holder: [{"as_property": {"name": c.property.get(), "mutations": [mutation]}}]})
             continue
         parts = [{"as_link": {"name": x.link.get(), "mutations": [{"set": {"ref": {"symbol": name[id(x.binding)]}}}]}}
                  for x in sorted(c.links, key=lambda x: x.link.get())]
         parts += [{"as_property": {"name": k, "mutations": [{"set": {"value": v}}]}}
-                  for k, v in json.loads(c.property_values.get()).items()]
+                  for k, v in JSON.loads(c.property_values.get()).items()]
         spec.append({holder: [{"as_adjacency": {"name": c.adjacency.get(), "mutations": [
             {c.verb.get(): {"entries": [{"mutations": parts}]}}]}}]})
     return {"mutations": [{"upsert": {"exists": [{"symbols": symbols, "spec": spec}]}}]}
@@ -253,15 +252,16 @@ def replay(journal: Any, target: Any) -> None:
 def _made(store: Any, journal: Any, changes: Any, name: str | None) -> Any:
     """A journal transaction of `journal`, holding `changes`, made in `store`, within a transaction: its bindings and
     its changes as the journal's own data."""
-    plain = changes if isinstance(changes, dict) else json.loads(JSON.dumps(
+    plain = changes if isinstance(changes, dict) else JSON.loads(JSON.dumps(
         Plain.ToPlain(Proxies.store_of(changes)).Transaction(changes)))
     (pattern,) = plain["mutations"][0]["upsert"]["exists"]
     if name is None:  # its identity in the journal, never its order
         name = f"t{len(list(journal.contains)) + 1}"
-    made = store.Journals.OfTransaction(lambda t: t.journal(lambda a: a.insert(lambda e: e.name(name).journal(journal))))
+    made = store.Journals.OfTransaction(lambda t: t.journal(lambda a: a.insert(
+        lambda e: e.name(name).journal(journal))))
     bindings = {}
     for i, (symbol, bound) in enumerate(pattern["symbols"].items()):
-        held, schema = (json.dumps(bound["reference"]), None) if "reference" in bound else (None, json.dumps(
+        held, schema = (JSON.dumps(bound["reference"]), None) if "reference" in bound else (None, JSON.dumps(
             bound["schema"]))
         bindings[symbol] = store.Journals.OfBinding(lambda b, i=i, held=held, schema=schema: b
             .transaction(lambda a: a.insert(lambda e: e.index(i).transaction(made))).reference(held).schema(schema))
@@ -275,7 +275,7 @@ def _made(store: Any, journal: Any, changes: Any, name: str | None) -> Any:
                                                     h=bindings[symbol]: c
                         .transaction(lambda a: a.insert(lambda e: e.index(n).transaction(made)))
                         .holder(lambda a: a.insert(lambda e: e.binding(h)))
-                        .property(p).verb(verb).value(json.dumps(body["value"]) if verb == "set" else None))
+                        .property(p).verb(verb).value(JSON.dumps(body["value"]) if verb == "set" else None))
                     index += 1
                     continue
                 for v in m["as_adjacency"]["mutations"]:
@@ -290,7 +290,7 @@ def _made(store: Any, journal: Any, changes: Any, name: str | None) -> Any:
                             .transaction(lambda a: a.insert(lambda e: e.index(n).transaction(made)))
                             .holder(lambda a: a.insert(lambda e: e.binding(h)))
                             .links(lambda a, links=links: _linked(a, links, bindings))
-                            .verb(verb).adjacency(a_).property_values(json.dumps(values)))
+                            .verb(verb).adjacency(a_).property_values(JSON.dumps(values)))
                         index += 1
     return made
 
