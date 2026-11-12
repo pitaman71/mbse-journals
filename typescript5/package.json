@@ -1,11 +1,13 @@
 {
   "name": "@mbse/journals",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Journals of mbse-schemas stores: each transaction's exact effect, in a journal language of symbols, relation entries and property mutations, applied idempotently, read from any position, inserted at one, sent and received (TypeScript implementation)",
   "type": "module",
   "private": true,
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./Framework": "./src/Framework/index.ts",
+    "./Framework/*": "./src/Framework/*.ts"
   },
   "engines": {
     "node": ">=22"
