@@ -8,7 +8,7 @@ version = "0.2.0"
 description = "Journals of mbse-schemas stores: each transaction's exact effect, in a journal language of symbols, relation entries and property mutations, applied idempotently, read from any position, inserted at one, sent and received"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["mbse-schemas>=0.26.13,<0.27"]
+dependencies = ["mbse-schemas>=0.26.14,<0.27"]
 
 [tool.setuptools.packages.find]
 include = ["mbse*"]
