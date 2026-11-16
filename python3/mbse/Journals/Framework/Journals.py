@@ -215,7 +215,7 @@ def changes(transaction: Any) -> Any:
             mutation = {"set": {"value": JSON.loads(c.value.get())}} if verb == "set" else {"clear": {}}
             spec.append({holder: [{"as_property": {"name": c.property.get(), "mutations": [mutation]}}]})
             continue
-        parts = [{"as_link": {"name": x.link.get(), "mutations": [{"set": {"ref": {"symbol": name[id(x.binding)]}}}]}}
+        parts = [{"as_link": {"name": x.link.get(), "mutations": [{"set": {"reference": {"symbol": name[id(x.binding)]}}}]}}
                  for x in sorted(c.links, key=lambda x: x.link.get())]
         parts += [{"as_property": {"name": k, "mutations": [{"set": {"value": v}}]}}
                   for k, v in JSON.loads(c.property_values.get()).items()]
@@ -281,7 +281,7 @@ def _made(store: Any, journal: Any, changes: Any, name: str | None) -> Any:
                 for v in m["as_adjacency"]["mutations"]:
                     ((verb, body),) = v.items()
                     for entry in body["entries"]:
-                        links = {x["as_link"]["name"]: x["as_link"]["mutations"][0]["set"]["ref"]["symbol"]
+                        links = {x["as_link"]["name"]: x["as_link"]["mutations"][0]["set"]["reference"]["symbol"]
                                  for x in entry["mutations"] if "as_link" in x}
                         values = {x["as_property"]["name"]: x["as_property"]["mutations"][0]["set"]["value"]
                                   for x in entry["mutations"] if "as_property" in x}
