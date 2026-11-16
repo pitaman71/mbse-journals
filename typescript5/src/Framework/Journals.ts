@@ -213,7 +213,7 @@ export function changes(transaction: any): Plain.PlainData {
     }
     const parts: unknown[] = [...c.links].sort((x: any, y: any) => x.link.get() < y.link.get() ? -1 : 1) // each differs
       .map((x: any) => ({ as_link: { name: x.link.get(), mutations: [
-        { set: { ref: { symbol: name.get(x.binding) } } }] } }));
+        { set: { reference: { symbol: name.get(x.binding) } } }] } }));
     for (const [k, v] of Json.loads(c.property_values.get()) as Plain.PlainMap) {
       parts.push({ as_property: { name: k, mutations: [{ set: { value: v } }] } });
     }
@@ -290,7 +290,7 @@ function _made(store: any, journal: any, changes: any, name: string | null): any
             const n = BigInt(index);
             const links = new Map<string, string>(entry.get("mutations").filter((x: any) => x.has("as_link"))
               .map((x: any) => [x.get("as_link").get("name"),
-                x.get("as_link").get("mutations")[0].get("set").get("ref").get("symbol")]));
+                x.get("as_link").get("mutations")[0].get("set").get("reference").get("symbol")]));
             const values: Plain.PlainMap = new Map(entry.get("mutations").filter((x: any) => x.has("as_property"))
               .map((x: any) => [x.get("as_property").get("name"),
                 x.get("as_property").get("mutations")[0].get("set").get("value")]));
