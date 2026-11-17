@@ -467,7 +467,7 @@ wheels = [
 
 [[package]]
 name = "mbse-journals"
-version = "0.2.1"
+version = "0.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "mbse-schemas" },
@@ -496,7 +496,7 @@ dev = [
 
 [[package]]
 name = "mbse-schemas"
-version = "0.26.30"
+version = "0.29.0"
 source = { editable = "../../mbse-schemas/python3" }
 
 [package.metadata]

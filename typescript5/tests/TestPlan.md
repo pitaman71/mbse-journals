@@ -4,7 +4,7 @@
 # Test plan — typescript5
 
 The same suites and cases as [the Python test plan](../../python3/tests/TestPlan.md), in the same order. Differences:
-none yet; each is listed in [Equivalence](../../docs/EQUIVALENCE.md).
+those [Equivalence](../../docs/EQUIVALENCE.md#deliberate-differences) lists, each a form of plain data or a path.
 
 ---
 

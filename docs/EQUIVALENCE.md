@@ -17,8 +17,13 @@ modules, names, error classes and messages, and the same test cases in the same 
 ## Deliberate differences
 
 Each difference a language forces is listed here, as mbse-basis
-[PRI-040: deliberate differences listed](https://github.com/pitaman71/mbse-basis/blob/main/docs/PRINCIPLES.md#PRI-040) asks; any other difference is a bug. There are none yet. A difference is
-added as a row of a table: its concern, each language's way, why, and the cases that assert it.
+[PRI-040: deliberate differences listed](https://github.com/pitaman71/mbse-basis/blob/main/docs/PRINCIPLES.md#PRI-040) asks; any other difference is a bug. A difference is added as a row of a table: its concern, each
+language's way, why, and the cases that assert it.
+
+| Concern | Python | TypeScript | Why | Cases |
+|---|---|---|---|---|
+| A journal's transaction, as plain data | a `dict` | a `Map` | each is mbse-schemas' plain form in that language (`Plain.PlainMap`) | JRN-01, JRN-07 |
+| A file's path | a `str` or a `pathlib.Path` | a `string` | each language's own path | JRN-05 |
 
 ## Cases in one language only
 

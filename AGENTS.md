@@ -1,8 +1,9 @@
 # Guide for AI agents
 
-mbse-journals keeps the history of [mbse-schemas](https://github.com/pitaman71/mbse-schemas) stores as journals: each
-transaction's exact effect, written in a journal language, applied idempotently, read from any position and inserted at
-one, sent and received. Two
+mbse-journals works with the history of [mbse-schemas](https://github.com/pitaman71/mbse-schemas) stores as journals,
+data outside any store: mbse-schemas' `Changes.Journal`, as a store's `follow` gives it, as plain data, its
+transactions read from after any one, joined, streamed to a peer and kept in files. It defines no schemas of its own,
+and a journal is never kept in a store nor a follower. Two
 equivalent implementations exist: `python3/` (`mbse.Journals`) and `typescript5/` (`@mbse/journals`).
 
 ## Start here
@@ -12,7 +13,7 @@ equivalent implementations exist: `python3/` (`mbse.Journals`) and `typescript5/
 | Know why the mbse repositories exist, and this one's part in them | [Why the mbse repositories exist](MBSE.md) |
 | Use the library | The skill, written once: [its source](skills/mbse-journals/SKILL.md), packaged in each language as [the Python copy](python3/mbse/Journals/skill/SKILL.md) and [the TypeScript copy](typescript5/skill/SKILL.md). Each practice links its case in each language's tutorials or tests |
 | Learn it by example | [The Python tutorial](python3/tutorials/README.md); the same in [the TypeScript tutorial](typescript5/tutorials/README.md) |
-| Understand the design, a capability not yet built or a decision | mbse-basis [INI-013: journals framework](https://github.com/pitaman71/mbse-basis/blob/main/proposals/PRIORITIES.md#ini-013--journals-framework), [the journals proposal](https://github.com/pitaman71/mbse-basis/blob/main/proposals/JOURNALS.md), and its capabilities, from [CAP-271: the journal language](https://github.com/pitaman71/mbse-basis/blob/main/docs/capabilities/README.md#CAP-271) |
+| Understand the design, a capability not yet built or a decision | mbse-basis [INI-013: journals framework](https://github.com/pitaman71/mbse-basis/blob/main/proposals/PRIORITIES.md#ini-013--journals-framework), [the journals proposal](https://github.com/pitaman71/mbse-basis/blob/main/proposals/JOURNALS.md), and its capabilities, from [CAP-271: the journal language](https://github.com/pitaman71/mbse-basis/blob/main/docs/capabilities/README.md#CAP-271); the journal language itself is mbse-schemas' `Changes` module |
 | Change the package | this file, then [Equivalence](docs/EQUIVALENCE.md) |
 | Find or add a test case | [Test plan](python3/tests/TestPlan.md) (TypeScript's plan lists only its differences) |
 
