@@ -3,7 +3,7 @@
 
 # Tutorial: mbse-journals
 
-How to keep a store's history as a journal, and work from it, one case study per notebook, for developers of
+How to work with a store's history as a journal, outside any store, one case study per notebook, for developers of
 mbse-schemas models. No case study yet: each is added with the first capability that has something to teach. A
 TypeScript port with the same case studies is [the TypeScript tutorial](../../typescript5/tutorials/README.md).
 

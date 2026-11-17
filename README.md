@@ -3,17 +3,19 @@
 
 # mbse-journals
 
-`mbse-journals` keeps a model's history as the model itself: a model is never snapshotted, but stored, communicated
-and analyzed as a journal, the sequence of its transactions, each stated as exactly what it changed. A journal can be
-replayed, read from any position, extended at one, sent and received, so that humans and agents work on the same
-history of a design, each step of it shown, explained and rewound. It is the history layer of the mbse repositories'
+`mbse-journals` works with a model's history as journals: a journal is the sequence of a store's transactions, each
+stated as exactly what it changed, never a snapshot, so that humans and agents work on the same history of a design,
+each step of it shown, explained and rewound. It is the history layer of the mbse repositories'
 [executable specifications](MBSE.md).
 
-Its packages, `mbse.Journals` in Python and `@mbse/journals` in TypeScript, are one library in two languages, over
-[mbse-schemas](https://github.com/pitaman71/mbse-schemas) stores. A journal entry is written in a journal language: a
-transaction's symbols, each bound to an object by its reference or to a new object, then its mutations, relation entries
-added and removed and properties mutated by mbse-schemas' verbs, applied idempotently. Built so far: nothing; the
-design is mbse-basis [INI-013: journals framework](https://github.com/pitaman71/mbse-basis/blob/main/proposals/PRIORITIES.md#ini-013--journals-framework) and
+A journal is [mbse-schemas](https://github.com/pitaman71/mbse-schemas)' own `Changes.Journal`, as a store's `follow`
+gives it: data, kept in no store, which a store holding the same schemas applies (`Changes.apply`). Its packages,
+`mbse.Journals` in Python and `@mbse/journals` in TypeScript, are one library in two languages, which define no schemas
+of their own and work with a journal as plain data, for the follow of the stores built over backends: positions (the
+whole transactions after one, named by its id), joining and inserting whole transactions, streams (a journal as its
+one-transaction journals, sent to a peer and rebuilt), and files (a journal kept as JSON lines, appended to by whole
+transactions). The design is mbse-basis
+[INI-013: journals framework](https://github.com/pitaman71/mbse-basis/blob/main/proposals/PRIORITIES.md#ini-013--journals-framework) and
 [the journals proposal](https://github.com/pitaman71/mbse-basis/blob/main/proposals/JOURNALS.md).
 
 ---
