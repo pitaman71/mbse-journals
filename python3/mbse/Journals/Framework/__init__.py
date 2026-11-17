@@ -1,5 +1,5 @@
-"""The journal: a store's history, kept as data in any store, its journal transactions in order
-([CAP-199: journals as queryable stores (mbse-journals)](mbse:mbse-basis/docs/capabilities/CAP-199.md)).
+"""Journals as values outside any store: `Changes.Journal`, as plain data, sliced after a position, joined, streamed
+and kept in files ([the journals proposal](mbse:mbse-basis/proposals/JOURNALS.md#decided)).
 """
 
 from . import Journals
