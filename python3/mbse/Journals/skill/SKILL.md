@@ -42,12 +42,11 @@ For what a journal says and how a store gives and applies one, read mbse-schemas
    which joins each one-transaction journal it is given into `journal`, a list; the function `follow` gives back ends
    it. A journal is iterated, compared and serialized as any plain data is.
    - Python: [JRN-01: A store's follow, collected, builds a journal: each transaction the store commits, in order, once, as plain data, each with its id, a position; once the follow ends, none is given](mbse:mbse-journals/python3/tests/03_Journals.ipynb#JRN-01) · TypeScript: [JRN-01: A store's follow, collected, builds a journal: each transaction the store commits, in order, once, as plain data, each with its id, a position; once the follow ends, none is given](mbse:mbse-journals/typescript5/tests/03_Journals.ipynb#JRN-01)
-3. **Apply a journal in a store, one transaction at a time.** *Why*: a store makes what it changed hold, and applied
-   again changes nothing. *When*: replicating, catching a store up. *How*: read each one-transaction journal
-   `Journals.split` gives as a `Changes.Journal` of the target store's (`Plain.FromPlain(store)` with
-   `store.registered("Changes.Journal")`), and apply it in a transaction of its own (`Changes.apply`), as a follow
-   gives them: mbse-schemas 0.29.0's `Changes.apply` refuses a journal of several transactions where a later one
-   deletes an object an earlier one made.
+3. **Apply a journal in a store, at once.** *Why*: a store makes what it changed hold, and applied again changes
+   nothing. *When*: replicating, catching a store up. *How*: read the journal, however many transactions it holds, as
+   a `Changes.Journal` of the target store's (`Plain.FromPlain(store)` with `store.registered("Changes.Journal")`), and
+   apply it in one transaction (`Changes.apply`), which applies its transactions in order, a later one deleting an
+   object an earlier one made too.
    - Python: [JRN-06: A journal, as plain data or read from a file, applied to a store holding the same schemas (`Changes.apply`), makes it hold what the followed store does, and applied again changes nothing; the slice after a position, applied to a store holding the journal up to it, makes it the same](mbse:mbse-journals/python3/tests/03_Journals.ipynb#JRN-06) · TypeScript: [JRN-06: A journal, as plain data or read from a file, applied to a store holding the same schemas (`Changes.apply`), makes it hold what the followed store does, and applied again changes nothing; the slice after a position, applied to a store holding the journal up to it, makes it the same](mbse:mbse-journals/typescript5/tests/03_Journals.ipynb#JRN-06)
 4. **Name a position by a transaction's id.** *Why*: a position is a transaction, never a count, so that it holds in
    every copy of the journal. *When*: catching up after the last transaction a peer or a store holds. *How*:
