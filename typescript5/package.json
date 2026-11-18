@@ -1,6 +1,6 @@
 {
   "name": "@mbse/journals",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Journals of mbse-schemas stores as data outside any store: mbse-schemas' Changes.Journal, as plain data, sliced after a position, joined, streamed and kept in files (TypeScript implementation)",
   "type": "module",
   "private": true,
