@@ -15,7 +15,7 @@ of their own and work with a journal as plain data, for the follow of the stores
 whole transactions after one, named by its id), joining and inserting whole transactions, streams (a journal as its
 one-transaction journals, sent to a peer and rebuilt), and files (a journal kept as JSON lines, appended to by whole
 transactions). The design is mbse-basis
-[INI-013: journals framework](https://github.com/pitaman71/mbse-basis/blob/main/proposals/PRIORITIES.md#ini-013--journals-framework) and
+[INI-013: journals framework](https://github.com/pitaman71/mbse-basis/blob/main/proposals/PRIORITIES.md#ini-013--define-and-build-journaled-persistence-framework) and
 [the journals proposal](https://github.com/pitaman71/mbse-basis/blob/main/proposals/JOURNALS.md).
 
 ---

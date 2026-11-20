@@ -10,7 +10,7 @@ it changed, as a store's `follow` gives them, one transaction at a time. It is d
 follower: built, sliced, joined, sent and written with no store, and applied by a store holding the same schemas
 (`Changes.apply`). mbse-journals works with journals as plain data, for the follow of the stores built over backends:
 positions, streams and files. It defines no schemas of its own. What it can do is the capabilities of
-[INI-013: journals framework](mbse:mbse-basis/proposals/PRIORITIES.md#ini-013--journals-framework), as
+[INI-013: journals framework](mbse:mbse-basis/proposals/PRIORITIES.md#ini-013--define-and-build-journaled-persistence-framework), as
 [the journals proposal](mbse:mbse-basis/proposals/JOURNALS.md#decided) decides them.
 
 This skill says why and when to do each thing, and how in general terms, in the names both implementations share. Each
