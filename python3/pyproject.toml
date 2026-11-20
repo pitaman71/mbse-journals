@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mbse-journals"
-version = "0.3.2"
+version = "0.3.3"
 description = "Journals of mbse-schemas stores as data outside any store: mbse-schemas' Changes.Journal, as plain data, sliced after a position, joined, streamed and kept in files"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["mbse-schemas>=0.35.0,<0.36"]
+dependencies = ["mbse-schemas>=0.36.0,<1.0"]
 
 [tool.setuptools.packages.find]
 include = ["mbse*"]
